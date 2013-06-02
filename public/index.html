@@ -5,6 +5,7 @@
 	<title>Chat nodejs</title>
 	<script src="//code.jquery.com/jquery-1.10.0.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
+	<script src="//underscorejs.org/underscore-min.js"></script>
 	<link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -46,17 +47,21 @@
 										<div id="chat-messages-inner"></div>
 								   </div>									
 								   <div class="chat-message well">
-										<button class="btn btn-success">Enviar</button>  
-										<span class="input-box">
-											<input type="text" name="msg-box" id="msg-box" />
-										</span>										                  
+										<!--<div class="row">
+											<div class="span8"><input type="text" placeholder="Nickname" /></div>
+										</div>-->
+										<div class="">
+											<button class="btn btn-success">Enviar</button>  
+											<span class="input-box">
+												<input type="text" name="msg-box" id="msg-box" />
+											</span>
+										</div>
 								   </div>                   
 								</div>
 								<div class="chat-users panel-right">
 									<div class="panel-title"><h5>Usuarios en linea</h5></div>
 									<div class="panel-content nopadding">
 										<ul class="contact-list">
-											<li id="user-master-moda"><a href="chat.html#"><img alt="" src="img/demo/av1.jpg" /> <span>Master Moda</span></a></li>
 										</ul>
 									</div>
 								</div>

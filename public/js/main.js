@@ -1,10 +1,9 @@
 jQuery(function() {
-	var msg_template = '<p><span class="msg-block"><strong></strong><span class="time"></span><span class="msg"></span></span></p>';
-	//Cuando el usuario se conecta ponemos alerta en el sistema
+	var msg_template  = '<p><span class="msg-block"><strong></strong><span class="time"></span><span class="msg"></span></span></p>'
+	   ,chat_template = '<li id="<%= nickname %>"><a href="#"><img alt="" src="img/demo/av1.jpg" /> <span><%= nickname %></span></a></li>';
+
 	socket.on('connect', function() {
-	    var  inner = $('#chat-messages-inner');
-	    inner.append('<p class="online"><span>Usuario ingreso a las ' + new Date().getTime() + '</span></p>');
-	    inner.hide().fadeIn(800);
+		socket.emit('nickname', 'usuario_' + new Date().getTime());
 	});
 
 	$('.chat-message button').click(function(){
@@ -16,7 +15,7 @@ jQuery(function() {
 	});
 
 	socket.on('sendyou', function(data) {
-		add_message('You','img/demo/av1.jpg',data.text,true);
+		add_message(data.nick,'img/demo/av1.jpg',data.message.text,true);
 	});
 
 	socket.on('counter', function(data) {
@@ -31,6 +30,14 @@ jQuery(function() {
 				socket.emit('sendyou', {text: $(this).val()}, true);
 			}		
 		}
+	});
+
+	socket.on('nicknames', function(data) {
+		var template = _.template(chat_template);
+		jQuery('.contact-list').empty();
+		_.each(data, function(item) {
+			jQuery('.contact-list').append(template({nickname: item}));
+		});
 	});
 
 	var i = 0;
